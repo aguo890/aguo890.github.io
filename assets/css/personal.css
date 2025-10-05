@@ -80,7 +80,7 @@
 .polaroid.is-active {
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(1.5) rotate(0deg);
+    transform: translate(-50%, -50%) scale(1.9) rotate(0deg);
     z-index: 1000;
     /* Bring the active polaroid to the very front */
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
