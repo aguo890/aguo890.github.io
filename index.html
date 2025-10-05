@@ -135,10 +135,12 @@
 				<!-- END: NEW PROJECTS TO ADD -->
 			</div>
 		</section>
-
 		<!-- START: POLAROID SCATTER GALLERY -->
 		<section class="polaroid-gallery-wrapper">
 			<div class="polaroid-container">
+
+				<!-- VISIBLE POLAROID LAYER -->
+				<!-- These elements will be animated by the triggers. -->
 				<div class="polaroid p1">
 					<a href="images/me/01.jpg" data-poptrox="gallery-me" class="image"><img src="images/me/01.jpg"
 							alt="A photo of me"></a>
@@ -162,7 +164,6 @@
 			</div>
 		</section>
 		<!-- END: POLAROID SCATTER GALLERY -->
-
 		<!-- One: Background -->
 		<section id="one">
 			<header class="major">
@@ -279,6 +280,45 @@
 	<script src="assets/js/main.js"></script>
 	<!-- Don't forget to create this file! -->
 	<script src="assets/js/personal.js"></script>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const container = document.querySelector('.polaroid-container');
+			const polaroids = document.querySelectorAll('.polaroid');
+
+			if (container && polaroids.length > 0) {
+
+				// When the mouse enters ANY individual polaroid...
+				polaroids.forEach(polaroid => {
+					polaroid.addEventListener('mouseenter', () => {
+						// ...only animate if the lightbox is closed.
+						if (!document.body.classList.contains('poptrox-active')) {
+							// Deactivate any other polaroid that might be active
+							const currentlyActive = container.querySelector('.polaroid.is-active');
+							if (currentlyActive && currentlyActive !== polaroid) {
+								currentlyActive.classList.remove('is-active');
+							}
+
+							// Activate the one we're hovering over.
+							polaroid.classList.add('is-active');
+							container.classList.add('is-zoomed');
+						}
+					});
+				});
+
+				// When the mouse leaves the ENTIRE container area...
+				container.addEventListener('mouseleave', () => {
+					// ...find whichever polaroid is active and deactivate it.
+					const activePolaroid = container.querySelector('.polaroid.is-active');
+					if (activePolaroid) {
+						activePolaroid.classList.remove('is-active');
+						container.classList.remove('is-zoomed');
+					}
+				});
+
+			}
+		});
+	</script>
 
 </body>
 
