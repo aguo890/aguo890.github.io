@@ -287,7 +287,11 @@
 			const container = document.querySelector('.polaroid-container');
 			const polaroids = document.querySelectorAll('.polaroid');
 
-			if (container && polaroids.length > 0) {
+			// This is a check to see if the device has a mouse/fine pointer.
+			// The animation logic will only be added on devices that can truly "hover".
+			const isDesktop = window.matchMedia('(pointer: fine)').matches;
+
+			if (container && polaroids.length > 0 && isDesktop) {
 
 				// When the mouse enters ANY individual polaroid...
 				polaroids.forEach(polaroid => {
