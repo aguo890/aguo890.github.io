@@ -3,7 +3,7 @@ window.onload = function () {
 };
 
 var i = 0;
-var txt = "Hi! My name is Aaron, I'm a Junior at the George Washington University with a passion for Data.";
+var txt = "Hi! My name is Aaron, welcome to my personal website!";
 /* The text */
 var speed = 40; /* The speed/duration of the effect in milliseconds */
 
