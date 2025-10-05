@@ -3344,3 +3344,76 @@ body.is-touch .poptrox-popup .closer {
 	}
 
 }
+
+
+/* -- Polaroid Scatter Gallery -- */
+.polaroid-gallery-wrapper {
+	padding: 2em 0;
+}
+
+.polaroid-container {
+	position: relative;
+	width: 90%;
+	max-width: 1000px;
+	height: 450px;
+	margin: 0 auto;
+}
+
+.polaroid {
+	position: absolute;
+	padding: 10px 10px 20px 10px;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.polaroid:hover {
+	transform: scale(1.15) rotate(0deg) !important;
+	/* Straightens and enlarges */
+	z-index: 10;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.polaroid img {
+	display: block;
+	width: 100%;
+}
+
+/* Individual positions and rotations */
+.polaroid.p1 {
+	top: 5%;
+	left: 10%;
+	width: 25%;
+	transform: rotate(-8deg);
+}
+
+.polaroid.p2 {
+	top: 20%;
+	left: 40%;
+	width: 30%;
+	transform: rotate(5deg);
+	z-index: 2;
+}
+
+.polaroid.p3 {
+	top: 10%;
+	left: 70%;
+	width: 22%;
+	transform: rotate(12deg);
+}
+
+.polaroid.p4 {
+	top: 45%;
+	left: 15%;
+	width: 28%;
+	transform: rotate(-10deg);
+	z-index: 3;
+}
+
+.polaroid.p5 {
+	top: 50%;
+	left: 60%;
+	width: 26%;
+	transform: rotate(7deg);
+}
