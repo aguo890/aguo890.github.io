@@ -92,6 +92,12 @@
     filter: blur(3px);
 }
 
+.polaroid a {
+    pointer-events: none;
+    /* This makes the link unclickable */
+    cursor: default;
+    /* This changes the cursor from a "hand" to the default arrow */
+}
 
 /* =================================================================== */
 /* == Polaroid Gallery: MOBILE & TABLET STYLES == */
