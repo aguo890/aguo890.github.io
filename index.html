@@ -40,9 +40,64 @@
 			<div class="row">
 				<!-- IMPROVEMENT: Restructured each project for clarity and consistency. Added rel="noopener noreferrer" to all external links. -->
 				<article class="col-6 col-12-xsmall work-item">
+
+					<!-- =========== IMAGE GALLERY (Entry Point) =========== -->
+					<!-- This first link with the <img> is the VISIBLE thumbnail. -->
+					<!-- Clicking it will open a gallery. Add a "data-lightbox-gallery" attribute. -->
+					<a href="images/fulls/university-dashboard-main.jpg" class="image fit thumb"
+						data-lightbox-gallery="university-project-gallery">
+						<img src="images/thumbs/university-dashboard-main.jpg"
+							alt="Main dashboard of the University Testing Facility application" />
+					</a>
+
+					<!-- These links below are HIDDEN. They are the other images in the gallery. -->
+					<!-- The lightbox script finds them because they share the same 'data-lightbox-gallery' value. -->
+					<!-- Make sure these links exist, even though they aren't displayed on the page. -->
+					<a href="images/fulls/university-dashboard-files.jpg"
+						data-lightbox-gallery="university-project-gallery"
+						title="File Sharing UI with upload form and file table."></a>
+					<a href="images/fulls/university-backend-code.jpg"
+						data-lightbox-gallery="university-project-gallery"
+						title="Backend: Python code showing the thread-safe database connection pool."></a>
+					<a href="images/fulls/university-frontend-code.jpg"
+						data-lightbox-gallery="university-project-gallery"
+						title="Frontend: TypeScript code for the FileSharingPage React component."></a>
+					<!-- ======================================================= -->
+
+					<h3>Full-Stack University Management System</h3>
+					<p>
+						Architected and developed a full-stack management system for a university testing facility.
+						I led the frontend development, crafting the entire dynamic single-page application (SPA) using
+						React and
+						TypeScript for a type-safe, responsive user experience.
+					</p>
+					<p>
+						Beyond the UI, I played a pivotal role on the backend, contributing heavily to the
+						Python/FastAPI REST API and
+						engineering the database access layer. My primary focus was the seamless end-to-end integration,
+						ensuring robust
+						communication and data flow between the client and server.
+					</p>
+					<p><strong>Tech Stack:</strong> Python, FastAPI, React, TypeScript, MySQL, Ansible, Docker</p>
+
+					<!-- =========== GITHUB & ACCESS NOTE =========== -->
+					<p>
+						<!-- Replace with your actual GitHub link -->
+						<a href="https://github.com/your-username/university-testing-app" target="_blank"
+							rel="noopener noreferrer">View
+							on GitHub</a>
+					</p>
+					<p>
+						<em>Private repository &ndash; a live demo and full code access can be provided upon
+							request.</em>
+					</p>
+
+				</article>
+
+				<article class="col-6 col-12-xsmall work-item">
 					<a href="images/fulls/01.jpg" class="image fit thumb"><img src="images/thumbs/01.jpg"
 							alt="Screenshot of the graduate application system" /></a>
-					<h3>DataGraduate Application System</h3>
+					<h3>Graduate Application System</h3>
 					<p>Led a team of 6 to develop a full-stack web application featuring an AI chatbot for user support,
 						architected the database schema, and owned backend logic and cloud deployment.</p>
 					<p><strong>Tech Stack:</strong> Python (Flask), MySQL, AWS, Gemini API, JavaScript</p>
@@ -100,21 +155,7 @@
 
 				<!-- START: NEW PROJECTS TO ADD -->
 				<!-- Project 5: LinkedIn Automation Bot -->
-				<article class="col-6 col-12-xsmall work-item">
-					<!-- IMPORTANT: Replace with your actual project images -->
-					<a href="images/fulls/05.jpg" class="image fit thumb"><img src="images/thumbs/05.jpg"
-							alt="Screenshot of a script automating LinkedIn messages" /></a>
-					<h3>LinkedIn Referral & Connection Bot</h3>
-					<p>Developed an automation script using Selenium to streamline the job application process by
-						finding connections at
-						target companies and sending personalized referral requests.</p>
-					<p><strong>Tech Stack:</strong> Python, Selenium, WebDriver Manager, SQLite</p>
-					<p>
-						<!-- IMPORTANT: Replace with your actual GitHub repo link -->
-						<a href="https://github.com/aguo890/linkedin-connection-referral-bot" target="_blank"
-							rel="noopener noreferrer">GitHub</a>
-					</p>
-				</article>
+
 
 				<!-- Project 6: Job Application Tracker -->
 				<article class="col-6 col-12-xsmall work-item">
@@ -182,7 +223,7 @@
 				little scripts to help my parents get a better handle on inventory. That’s when I fell in love with
 				using technology
 				to solve real, everyday problems. It’s the same energy I bring to my Computer Science studies at GWU
-				today—I just
+				today.I just
 				love building things that are genuinely useful.</p>
 			<p>When I'm not behind a keyboard, I'm probably exploring a new coffee shop or trying to find the best
 				noodle soup in
