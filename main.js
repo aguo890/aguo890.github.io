@@ -116,14 +116,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 1. Hover Video Preview (Card)
             if (video) {
-                video.playbackRate = 0.33; // 3x Slower (Cinematic)
-                video.pause(); // Ensure paused initially
+                video.muted = true; // Required for autoplay
+                video.playbackRate = 1.0; // Normal Speed
+
+                let playPromise;
+
                 card.addEventListener('mouseenter', () => {
-                    video.play().catch(e => { /* Ignore autoplay errors */ });
+                    playPromise = video.play();
+
+                    if (playPromise !== undefined) {
+                        playPromise.catch(error => {
+                            console.log('Autoplay prevented:', error);
+                        });
+                    }
                 });
+
                 card.addEventListener('mouseleave', () => {
-                    video.pause();
-                    video.currentTime = 0;
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            video.pause();
+                            video.currentTime = 0;
+                        }).catch(() => {
+                            // Video might not have started yet, ensuring pause
+                            video.pause();
+                            video.currentTime = 0;
+                        });
+                    } else {
+                        video.pause();
+                        video.currentTime = 0;
+                    }
                 });
             }
 

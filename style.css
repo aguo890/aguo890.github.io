@@ -583,21 +583,21 @@ body>* {
 
 .modal-media-wrapper {
   width: 100%;
-  aspect-ratio: 16 / 9;
   background: #000;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 200px;
 }
 
 .modal-media-wrapper img,
 .modal-media-wrapper video {
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 85vh;
   object-fit: contain;
-  /* Show full video/image uncropped */
-  max-height: 60vh;
 }
 
 .modal-body {
@@ -878,14 +878,16 @@ body.modal-open {
 
 .project-card:hover {
   border-color: var(--border-hover);
-  transform: translateY(-4px);
+  transform: translateY(-4px) scale(1.02);
   box-shadow: var(--shadow-lg), var(--shadow-glow);
+  z-index: 10;
 }
 
 .project-card-image {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
+  /* Fit standard video perfectly */
   overflow: hidden;
   background: var(--bg-primary);
 }
@@ -895,7 +897,7 @@ body.modal-open {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform var(--transition-slow);
+  transition: transform var(--transition-slow), object-fit var(--transition-normal);
 }
 
 .project-card-image video {
@@ -903,14 +905,14 @@ body.modal-open {
   /* Black bars when contained */
 }
 
-/* Hover: Scale image */
+/* Hover: No internal zoom on image/video */
 .project-card:hover .project-card-image img {
-  transform: scale(1.05);
+  transform: none;
 }
 
-/* Hover: Scale video AND switch to contain (full size) */
+/* Hover: Switch video to contain (full size) but no extra scale */
 .project-card:hover .project-card-image video {
-  transform: scale(1.05);
+  transform: none;
   object-fit: contain;
 }
 
