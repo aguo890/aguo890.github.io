@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <video src="${project.video}" controls autoplay loop playsinline class="modal-video"></video>
             `;
             const v = modalImageContainer.querySelector('video');
-            if (v) v.playbackRate = 0.33;
+            if (v) v.playbackRate = 0.70;
         } else if (project.image) {
             modalImageContainer.innerHTML = `
                 <img src="${project.image}" alt="${project.title}" class="modal-image">
@@ -190,4 +190,62 @@ document.addEventListener('DOMContentLoaded', () => {
             attachCardInteractions(); // Re-attach listeners
         });
     });
+
+    // 4. Hero Carousel
+    const initHeroCarousel = () => {
+        const carousel = document.getElementById('hero-carousel');
+        if (!carousel) return;
+
+        // Configuration
+        const cardWidth = 260; // Must match CSS width
+        const gap = 20; // Space between cards replacement
+
+        // Take top 5 projects for performance
+        const carouselProjects = PROJECTS.slice(0, 5);
+        const count = carouselProjects.length;
+
+        // Calculate Radius (Z-Translation)
+        const theta = 360 / count;
+        // radius = (width / 2) / tan( half_theta )
+        const radius = Math.round((cardWidth / 2) / Math.tan(Math.PI / count)) + gap;
+
+        carouselProjects.forEach((project, i) => {
+            const card = document.createElement('div');
+            card.className = 'carousel-card';
+
+            // Calculate rotation
+            const angle = theta * i;
+            card.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
+
+            // Interaction: Click to open modal
+            card.addEventListener('click', () => openModal(project.id));
+
+            // Populate Content
+            if (project.video) {
+                const vid = document.createElement('video');
+                vid.src = project.video;
+                vid.muted = true;
+                vid.loop = true;
+                vid.autoplay = true;
+                vid.playsInline = true;
+                card.appendChild(vid);
+            } else if (project.image) {
+                const img = document.createElement('img');
+                img.src = project.image;
+                card.appendChild(img);
+            } else {
+                // Fallback text
+                card.textContent = project.title;
+                card.style.color = 'var(--text-secondary)';
+                card.style.fontFamily = 'monospace';
+                card.style.padding = '1rem';
+                card.style.textAlign = 'center';
+            }
+
+            carousel.appendChild(card);
+        });
+    };
+
+    initHeroCarousel();
+
 });

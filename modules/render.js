@@ -57,6 +57,9 @@ function buildImageHTML(project, badgeHTML = '') {
       <div class="project-card-image">
         <video src="${project.video}" poster="${project.image || ''}" loop muted playsinline></video>
         ${badgeHTML}
+        <div class="project-card-overlay" aria-hidden="true">
+          <span class="project-card-overlay-text">View Details</span>
+        </div>
       </div>`;
   }
 
@@ -65,6 +68,9 @@ function buildImageHTML(project, badgeHTML = '') {
       <div class="project-card-image">
         <img src="${project.image}" alt="Screenshot of ${project.title}" loading="lazy" />
         ${badgeHTML}
+        <div class="project-card-overlay" aria-hidden="true">
+          <span class="project-card-overlay-text">View Details</span>
+        </div>
       </div>`;
   }
 
@@ -82,6 +88,9 @@ function buildImageHTML(project, badgeHTML = '') {
       </div>
       <div class="placeholder-grid"></div>
       ${badgeHTML}
+      <div class="project-card-overlay" aria-hidden="true">
+        <span class="project-card-overlay-text">View Details</span>
+      </div>
     </div>`;
 }
 
