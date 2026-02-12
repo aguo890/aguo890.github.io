@@ -13,6 +13,40 @@
 
 export const PROJECTS = [
   // ═══════════════════════════════════════════════════════════
+  // CAPSTONE: JEGA
+  // ═══════════════════════════════════════════════════════════
+  {
+    id: "jega-capstone",
+    title: "JEGA: Academic Test Facility",
+    subtitle: "Secure Proctored Environment for Academic Testing",
+    description:
+      "An open-source, full-stack application for creating a secure, proctored environment for academic testing. It provides instructors with a real-time dashboard to monitor student status, manage dynamic rosters, and visualize the physical lab layout.",
+    highlights: [
+      "Real-time spatial room map mirroring physical lab layout",
+      "Secure RBAC with session exclusivity to prevent login sharing",
+      "Dynamic roster management and bulk submission handling",
+      "Automated student device status monitoring",
+    ],
+    techStack: [
+      "React", "FastAPI", "MySQL", "Docker", "TypeScript", "Axios",
+    ],
+    category: "full-stack",
+    image: "images/projects/jega-dashboard.png",
+    video: null,
+    gallery: [
+      "images/projects/jega-activity.png",
+      "images/projects/jega-files.png",
+    ],
+    links: {
+      github: "https://github.com/aguo890/capstone",
+      demo: null,
+      live: null,
+    },
+    note: "GitHub access on request.",
+    featured: true,
+  },
+
+  // ═══════════════════════════════════════════════════════════
   // FLAGSHIP 1: LineSight
   // ═══════════════════════════════════════════════════════════
   {
@@ -97,6 +131,7 @@ export const PROJECTS = [
     ],
     category: "open-source",
     image: null,
+    video: "images/projects/job-scraping-app.mp4",
     gallery: [],
     links: {
       github: "https://github.com/aguo890/job-scraping-app",
@@ -116,6 +151,7 @@ export const PROJECTS = [
     techStack: ["Python", "FastAPI", "LaTeX", "Pydantic", "Jinja2", "YAML"],
     category: "open-source",
     image: null,
+    video: "images/projects/rendercv.mp4",
     gallery: [],
     links: {
       github: "https://github.com/aguo890/rendercv",
@@ -130,25 +166,6 @@ export const PROJECTS = [
   // OTHER PROJECTS
   // ═══════════════════════════════════════════════════════════
 
-  {
-    id: "graduate-application",
-    title: "Graduate Application System",
-    subtitle: "Full-Stack App with AI Chatbot",
-    description:
-      "Led a team of 6 to build a full-stack graduate application platform featuring an AI chatbot for user support, with cloud deployment on AWS and a MySQL-backed architecture.",
-    highlights: [],
-    techStack: ["Python", "Flask", "MySQL", "AWS", "Gemini API", "JavaScript"],
-    category: "full-stack",
-    image: null,
-    gallery: [],
-    links: {
-      github: "https://github.com/aguo890/project-phase-i-are-we-cooked",
-      demo: "https://www.youtube.com/watch?v=TcF3sAtyHhM",
-      live: null,
-    },
-    note: "GitHub access on request.",
-    featured: false,
-  },
   {
     id: "esports-analysis",
     title: "Statistical Analysis in Esports",
@@ -185,6 +202,26 @@ export const PROJECTS = [
       live: "https://www.tiktok.com/@crazystorylord",
     },
     note: null,
+    featured: false,
+  },
+
+  {
+    id: "graduate-application",
+    title: "Graduate Application System",
+    subtitle: "Full-Stack App with AI Chatbot",
+    description:
+      "Led a team of 6 to build a full-stack graduate application platform featuring an AI chatbot for user support, with cloud deployment on AWS and a MySQL-backed architecture.",
+    highlights: [],
+    techStack: ["Python", "Flask", "MySQL", "AWS", "Gemini API", "JavaScript"],
+    category: "full-stack",
+    image: null,
+    gallery: [],
+    links: {
+      github: "https://github.com/aguo890/project-phase-i-are-we-cooked",
+      demo: "https://www.youtube.com/watch?v=TcF3sAtyHhM",
+      live: null,
+    },
+    note: "GitHub access on request.",
     featured: false,
   },
 
