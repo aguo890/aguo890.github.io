@@ -722,12 +722,33 @@ body>* {
 }
 
 .modal-media-wrapper img,
-.modal-media-wrapper video {
-  width: auto;
+.modal-media-wrapper video,
+.modal-media-wrapper iframe {
+  width: 100%;
   height: auto;
-  max-width: 100%;
   max-height: 85vh;
   object-fit: contain;
+  display: block;
+}
+
+/* 16:9 Aspect Ratio Container for Videos/Iframes */
+.modal-video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  /* 16:9 ratio */
+  height: 0;
+  background: #000;
+  overflow: hidden;
+}
+
+.modal-video-container .modal-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  border: none;
 }
 
 .modal-body {

@@ -53,9 +53,23 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('.modal-highlights-title').style.display = 'none';
         }
 
-        // Populate Media (Video or Image)
+        // Populate Media (Priority: YouTube > Video > Image)
         modalImageContainer.innerHTML = '';
-        if (project.video) {
+        if (project.youtubeId) {
+            modalImageContainer.innerHTML = `
+                <div class="modal-video-container">
+                    <iframe 
+                        src="https://www.youtube.com/embed/${project.youtubeId}?autoplay=1" 
+                        title="${project.title} Video Presentation"
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen
+                        loading="lazy"
+                        class="modal-video">
+                    </iframe>
+                </div>
+            `;
+        } else if (project.video) {
             // Autoplay video in modal
             modalImageContainer.innerHTML = `
                 <video src="${project.video}" controls autoplay loop playsinline class="modal-video"></video>
@@ -67,8 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <img src="${project.image}" alt="${project.title}" class="modal-image">
             `;
         } else {
-            // Fallback: CSS placeholder in modal? Or just hide.
-            // For now, hide if no media.
             modalImageContainer.innerHTML = `<div class="modal-placeholder" style="height: 200px; background: var(--bg-primary); display: flex; align-items: center; justify-content: center; color: var(--text-muted);">No Preview Available</div>`;
         }
 
@@ -86,12 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.setAttribute('aria-hidden', 'true');
         document.body.classList.remove('modal-open');
 
-        // Stop video playback
-        const video = modalImageContainer.querySelector('video');
-        if (video) {
-            video.pause();
-            video.currentTime = 0;
-        }
+        // Stop media playback (YouTube, Video) by clearing container
+        modalImageContainer.innerHTML = '';
     };
 
     // Close on overlay click or close button

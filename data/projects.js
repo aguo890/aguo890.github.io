@@ -176,7 +176,7 @@ export const PROJECTS = [
     highlights: [],
     techStack: ["R", "dplyr", "ggplot2", "Statistical Modeling"],
     category: "data",
-    image: null,
+    image: "images/fulls/Statistical-Analysis-in-Esports.jpg",
     gallery: [],
     links: {
       github: null,
@@ -195,7 +195,7 @@ export const PROJECTS = [
     highlights: [],
     techStack: ["Python", "REST APIs", "Shell Scripting", "Cron", "Linux"],
     category: "data",
-    image: null,
+    image: "images/fulls/AI-Powered_Content_Pipeline.jpg",
     gallery: [],
     links: {
       github: "https://github.com/aguo890/ImprovedVideoBot",
@@ -215,13 +215,14 @@ export const PROJECTS = [
     highlights: [],
     techStack: ["Python", "Flask", "MySQL", "AWS", "Gemini API", "JavaScript"],
     category: "full-stack",
-    image: null,
+    image: "images/fulls/Graduate_Application_System.jpg",
     gallery: [],
     links: {
       github: "https://github.com/aguo890/project-phase-i-are-we-cooked",
       demo: "https://www.youtube.com/watch?v=TcF3sAtyHhM",
       live: null,
     },
+    youtubeId: "TcF3sAtyHhM",
     note: "GitHub access on request.",
     featured: false,
   },
