@@ -43,7 +43,7 @@ export const PROJECTS = [
       demo: null,
       live: null,
     },
-    note: "GitHub access on request.",
+    note: "",
     featured: true,
   },
 

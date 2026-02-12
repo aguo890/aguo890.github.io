@@ -1013,7 +1013,8 @@ body.modal-open {
 .project-card {
   border-radius: var(--radius-md);
   border: 1px solid var(--border);
-  overflow: hidden;
+  overflow: visible;
+  /* Changed from hidden to allow tag overflow */
   transition: all var(--transition-normal);
   /* Fallback solid bg */
   background: var(--bg-secondary);
@@ -1041,6 +1042,8 @@ body.modal-open {
   /* Fit standard video perfectly */
   overflow: hidden;
   background: var(--bg-primary);
+  /* Fix: Add top radius directly since parent is overflow:visible */
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
 }
 
 .project-card-image img,
@@ -1217,11 +1220,48 @@ body.modal-open {
   overflow: hidden;
 }
 
+.tags-wrapper {
+  position: relative;
+  height: 2.2rem;
+  /* Matches one row height */
+  width: 100%;
+  margin-top: auto;
+  z-index: 5;
+}
+
 .project-tags {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: var(--space-sm);
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  background-color: var(--bg-secondary);
+  /* CRITICAL: Prevents text overlap */
+  border-radius: 4px;
+
+  max-height: 2.2rem;
+  overflow: hidden;
+
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+
+  transition: max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.2s ease,
+    mask-image 0.1s linear;
+}
+
+.project-tags:hover {
+  max-height: 20rem;
+  z-index: 20;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+
+  mask-image: none;
+  -webkit-mask-image: none;
 }
 
 .project-tag {

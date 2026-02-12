@@ -131,9 +131,10 @@ function createCard(project) {
     <div class="project-card-body">
       <h3>${project.title}</h3>
       ${project.subtitle ? `<p class="project-subtitle">${project.subtitle}</p>` : ''}
-      <div class="project-tags">
-        ${project.techStack.slice(0, 4).map(t => `<span class="project-tag">${t}</span>`).join('')}
-        ${project.techStack.length > 4 ? `<span class="project-tag">+${project.techStack.length - 4}</span>` : ''}
+      <div class="tags-wrapper">
+        <div class="project-tags">
+          ${(project.techStack || []).map(t => `<span class="project-tag">${t}</span>`).join('')}
+        </div>
       </div>
       <div class="project-links">
         ${linksHTML}
