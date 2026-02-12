@@ -151,24 +151,64 @@ function createCard(project) {
 /**
  * Renders the project grid, optionally filtering by category.
  */
-export function renderGrid(filterCategory = 'all') {
+/**
+ * Renders the project grid with cinematic "Exit -> Swap -> Enter" transitions.
+ * Returns a Promise that resolves when the grid has been repopulated (before entrance animation starts).
+ */
+export async function renderGrid(filterCategory = 'all') {
   const grid = document.getElementById('projects-grid');
   if (!grid) return;
 
+  // 1. Maintain container height to prevent layout shift during swap
+  const currentHeight = grid.offsetHeight;
+  if (currentHeight > 0) {
+    grid.style.minHeight = `${currentHeight}px`;
+  }
+
+  // 2. Exit Animation (if grid has items)
+  const currentCards = grid.querySelectorAll('.project-card');
+  if (currentCards.length > 0) {
+    // Notify accessibility that content is busy
+    grid.setAttribute('aria-busy', 'true');
+
+    currentCards.forEach(card => card.classList.add('exiting'));
+
+    // Wait for CSS transition (300ms)
+    await new Promise(r => setTimeout(r, 300));
+  }
+
+  // 3. Clear & Rebuild
   grid.innerHTML = '';
 
   const filtered = filterCategory === 'all'
     ? PROJECTS
     : PROJECTS.filter(p => p.category === filterCategory);
 
-  filtered.forEach(project => {
-    grid.appendChild(createCard(project));
+  filtered.forEach((project, index) => {
+    const card = createCard(project);
+
+    // Set initial state for entrance
+    card.classList.add('project-card-enter');
+    // Stagger logic: 50ms per card, capped at 1s max
+    card.style.transitionDelay = `${Math.min(index * 50, 1000)}ms`;
+
+    grid.appendChild(card);
   });
 
-  // Re-observe new cards for fade-in animation
-  if (window.__fadeObserver) {
-    grid.querySelectorAll('.fade-in').forEach(el => {
-      window.__fadeObserver.observe(el);
+  // 4. Trigger Entrance
+  // Force browser reflow to ensure initial styles apply before transition
+  grid.offsetHeight;
+
+  requestAnimationFrame(() => {
+    grid.querySelectorAll('.project-card-enter').forEach(card => {
+      card.classList.add('is-visible');
     });
-  }
+
+    // Reset min-height/aria-busy after animation starts
+    grid.style.minHeight = '';
+    grid.setAttribute('aria-busy', 'false');
+  });
+
+  // Note: We don't strictly need to re-observe .fade-in because we handle visibility manually here.
+  // But if there are other lazy-load images, the global observer handles them if they have .fade-in.
 }

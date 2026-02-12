@@ -1020,6 +1020,35 @@ body.modal-open {
   background: var(--bg-secondary);
 }
 
+/* EXIT STATE */
+.project-card.exiting {
+  opacity: 0;
+  transform: scale(0.95) translateY(10px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+/* ENTER INITIAL STATE */
+.project-card-enter {
+  opacity: 0;
+  transform: translateY(30px);
+  /* Transition set here */
+  transition:
+    opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+  /* Prevents micro-stutter */
+}
+
+/* ENTER ACTIVE STATE */
+.project-card-enter.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @supports (backdrop-filter: blur(10px)) {
   .project-card {
     background: var(--bg-glass);

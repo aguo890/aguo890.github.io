@@ -188,14 +188,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Filter Buttons
     const filterButtons = document.querySelectorAll('.filter-btn');
+
     filterButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterButtons.forEach(b => b.classList.remove('active'));
+        btn.addEventListener('click', async () => {
+            // Prevent clicks during transition
+            if (btn.classList.contains('disabled')) return;
+
+            // UI Toggle
+            filterButtons.forEach(b => {
+                b.classList.remove('active');
+                b.classList.add('disabled'); // Lock all buttons
+                b.style.pointerEvents = 'none'; // Extra safety
+            });
             btn.classList.add('active');
 
             const category = btn.dataset.category;
-            renderGrid(category);
-            attachCardInteractions(); // Re-attach listeners
+
+            // Wait for Cinematic Render
+            await renderGrid(category);
+
+            // Re-attach listeners to new cards
+            attachCardInteractions();
+
+            // Unlock buttons
+            filterButtons.forEach(b => {
+                b.classList.remove('disabled');
+                b.style.pointerEvents = '';
+            });
         });
     });
 
