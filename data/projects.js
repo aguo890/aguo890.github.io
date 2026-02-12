@@ -31,9 +31,10 @@ export const PROJECTS = [
       "React", "FastAPI", "MySQL", "Docker", "TypeScript", "Axios",
     ],
     category: "full-stack",
-    image: "images/projects/jega-dashboard.png",
-    video: null,
+    image: null,
+    video: "images/projects/capstone.mp4",
     gallery: [
+      "images/projects/jega-dashboard.png",
       "images/projects/jega-activity.png",
       "images/projects/jega-files.png",
     ],
