@@ -1496,8 +1496,23 @@ body.modal-open {
    ======================================================================== */
 .skills-categories {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: 1fr;
+  /* Mobile: 1 col */
   gap: var(--space-md);
+}
+
+@media (min-width: 768px) {
+  .skills-categories {
+    grid-template-columns: repeat(2, 1fr);
+    /* Tablet: 2x2 */
+  }
+}
+
+@media (min-width: 1200px) {
+  .skills-categories {
+    grid-template-columns: repeat(4, 1fr);
+    /* Desktop: 1x4 */
+  }
 }
 
 .skills-card {
