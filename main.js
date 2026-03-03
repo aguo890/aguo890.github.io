@@ -278,12 +278,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // The carousel's total logical width is roughly 2 * radius + cardWidth
             const totalWidth = (radius * 2) + cardWidth + 40; // with some padding
 
-            if (containerWidth < totalWidth) {
-                const scale = containerWidth / totalWidth;
-                scene.style.transform = `scale(${scale})`;
-            } else {
-                scene.style.transform = `scale(1)`;
-            }
+            // Calculate scale proportionally
+            const scale = containerWidth / totalWidth;
+
+            // Apply scale with a safe maximum of 1.8x
+            scene.style.transform = `scale(${Math.min(scale, 1.8)})`;
         };
 
         // Initialize and Observe
