@@ -379,47 +379,46 @@ body>* {
 .hero .container {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 3rem;
   /* Ensure content doesn't touch edges */
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding: var(--space-xl) var(--space-md);
 }
 
 /* --- HERO VISUAL / 3D CAROUSEL --- */
 .hero-visual {
-  display: none;
-  /* Hidden on mobile */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 300px;
+  perspective: 1000px;
+  overflow: visible;
 }
 
-/* Desktop Styles */
 @media (min-width: 1024px) {
   .hero .container {
-    display: grid;
-    /* 1.2fr for content gives text slightly more breathing room */
-    grid-template-columns: 1.2fr 0.8fr;
-    /* align-items: center;  <-- Removed to allow individual alignment */
-    height: 100vh;
-    /* Ensure container fills the viewport for bottom alignment */
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    min-height: calc(100vh - var(--nav-height));
+    justify-content: center;
+    gap: 4rem;
+    max-width: 1920px;
+    margin: 0 auto;
     padding-bottom: 2rem;
-    /* Prevent flush against edge */
   }
 
   .hero-content {
-    align-self: center;
-    /* Keep text centered vertically */
+    width: 60%;
+    max-width: 80ch;
   }
 
   .hero-visual {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 500px;
-    perspective: 1000px;
-    /* Determines depth intensity */
-    overflow: visible;
-
-    align-self: center;
-    justify-self: center;
+    width: 40%;
+    min-height: 500px;
   }
 }
 
@@ -514,6 +513,7 @@ body>* {
 }
 
 .hero-name {
+  font-size: clamp(2.5rem, 5vw, 5rem);
   margin-bottom: var(--space-md);
 }
 
@@ -525,10 +525,10 @@ body>* {
 }
 
 .hero-subtitle {
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
   color: var(--text-secondary);
   margin-bottom: var(--space-lg);
-  max-width: 550px;
+  max-width: 65ch;
 }
 
 /* Typing cursor */

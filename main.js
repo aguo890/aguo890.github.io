@@ -221,7 +221,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Hero Carousel
     const initHeroCarousel = () => {
         const carousel = document.getElementById('hero-carousel');
-        if (!carousel) return;
+        const visual = document.querySelector('.hero-visual');
+        const scene = document.querySelector('.scene');
+        if (!carousel || !visual || !scene) return;
 
         // Configuration
         const cardWidth = 260; // Must match CSS width
@@ -233,7 +235,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Calculate Radius (Z-Translation)
         const theta = 360 / count;
-        // radius = (width / 2) / tan( half_theta )
         const radius = Math.round((cardWidth / 2) / Math.tan(Math.PI / count)) + gap;
 
         carouselProjects.forEach((project, i) => {
@@ -261,7 +262,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 img.src = project.image;
                 card.appendChild(img);
             } else {
-                // Fallback text
                 card.textContent = project.title;
                 card.style.color = 'var(--text-secondary)';
                 card.style.fontFamily = 'monospace';
@@ -271,6 +271,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
             carousel.appendChild(card);
         });
+
+        // Fluid Scaling Logic
+        const handleResize = () => {
+            const containerWidth = visual.clientWidth;
+            // The carousel's total logical width is roughly 2 * radius + cardWidth
+            const totalWidth = (radius * 2) + cardWidth + 40; // with some padding
+
+            if (containerWidth < totalWidth) {
+                const scale = containerWidth / totalWidth;
+                scene.style.transform = `scale(${scale})`;
+            } else {
+                scene.style.transform = `scale(1)`;
+            }
+        };
+
+        // Initialize and Observe
+        handleResize();
+        const resizeObserver = new ResizeObserver(handleResize);
+        resizeObserver.observe(visual);
     };
 
     initHeroCarousel();
