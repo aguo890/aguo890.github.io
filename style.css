@@ -418,12 +418,8 @@ body>* {
     /* Determines depth intensity */
     overflow: visible;
 
-    /* "Stacked on the bottom" alignment */
-    align-self: end;
+    align-self: center;
     justify-self: center;
-    /* Keep centered in its column, or 'end' for hard right? Let's stick to column center but bottom aligned.*/
-    margin-bottom: 4rem;
-    /* Lift slightly off the absolute bottom */
   }
 }
 
