@@ -17,10 +17,10 @@ export const PROJECTS = [
   // ═══════════════════════════════════════════════════════════
   {
     id: "jega-capstone",
-    title: "JEGA: Academic Test Facility",
+    title: "Academic Test Facility",
     subtitle: "Secure Proctored Environment for Academic Testing",
     description:
-      "An open-source, full-stack application for creating a secure, proctored environment for academic testing. It provides instructors with a real-time dashboard to monitor student status, manage dynamic rosters, and visualize the physical lab layout.",
+      "An open-source, full-stack application deployed by the George Washington University Computer Science program to create a secure, proctored testing environment. Operating in the Tompkins 304 physical lab, the platform will serve over 1,000 students per semester. It provides instructors with a real-time dashboard to monitor device status, manage dynamic rosters, and visualize the physical lab layout.",
     highlights: [
       "Real-time spatial room map mirroring physical lab layout",
       "Secure RBAC with session exclusivity to prevent login sharing",
@@ -119,6 +119,35 @@ export const PROJECTS = [
   // ═══════════════════════════════════════════════════════════
   // OPEN SOURCE CONTRIBUTIONS
   // ═══════════════════════════════════════════════════════════
+  {
+    id: "job-automation-suite",
+    title: "Job Automation Suite",
+    subtitle: "Multi-ATS Scraper & AI CV Generator",
+    description: "A powerful, highly-configurable suite designed to automate the job search by scraping high-signal job boards (Greenhouse, Lever, Ashby), ranking opportunities using a custom alignment algorithm, and generating perfectly tailored LaTeX PDF resumes with a single click. Features a dedicated Streamlit dashboard backed by an SRE-grade GitHub Actions automation pipeline.",
+    highlights: [
+      "Smart Ranking Algorithm fine-tuned for skill alignment",
+      "Custom CV Engine leveraging RenderCV for instant, tailored PDF generation",
+      "Fully autonomous daily scraping utilizing GitHub Actions and anti-bot jitters",
+      "Hermetic infrastructure with automated state persistence and backups",
+      "Open-source tool driving community impact with 300+ unique clones",
+    ],
+    techStack: [
+      "Python 3.12", "Streamlit", "LaTeX", "Docker", "GitHub Actions", "OpenAI API",
+    ],
+    // AI AGENT CONTEXT: Reverting category to open-source as requested to populate the Open Source tab alongside its individual sub-projects.
+    category: "open-source", 
+    image: null,
+    // TODO: Replace with a new video showing the Streamlit dashboard AND the CV generation
+    video: "images/projects/job-scraping-app.mp4", 
+    gallery: [],
+    links: {
+      github: "https://github.com/aguo890/Job-Automation-Suite",
+      demo: null,
+      live: null,
+    },
+    note: "",
+    featured: true,
+  },
   {
     id: "job-scraping-app",
     title: "Job Scraping Engine",

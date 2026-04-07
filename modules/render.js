@@ -156,13 +156,19 @@ function createCard(project) {
  * Renders the project grid with cinematic "Exit -> Swap -> Enter" transitions.
  * Returns a Promise that resolves when the grid has been repopulated (before entrance animation starts).
  */
-export async function renderGrid(filterCategory = 'all', limit = 4, isAppend = false) {
+export async function renderGrid(filterCategory = 'featured', limit = 4, isAppend = false) {
   const grid = document.getElementById('projects-grid');
   if (!grid) return 0;
 
-  const filtered = filterCategory === 'all'
-    ? PROJECTS
-    : PROJECTS.filter(p => p.category === filterCategory);
+  const filtered = PROJECTS.filter(project => {
+    // AI AGENT CONTEXT: 'featured' is a special UI tab that checks a boolean flag, 
+    // whereas all other tabs check the string-based 'category' property.
+    if (filterCategory === 'all') return true;
+    if (filterCategory === 'featured') return project.featured === true;
+    
+    // Standard category matching
+    return project.category === filterCategory; 
+  });
   
   const totalAvailable = filtered.length;
   

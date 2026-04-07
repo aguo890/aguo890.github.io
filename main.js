@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── INITIALIZATION ──────────────────────────────────────
 
     let currentLimit = 4;
-    let currentCategory = 'all';
+    let currentCategory = 'featured';
 
     async function updateGrid(category, isAppend = false) {
         const totalAvailable = await renderGrid(category, currentLimit, isAppend);
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 1. Render Grid
-    updateGrid('all');
+    updateGrid('featured');
 
     document.getElementById('load-more-btn').addEventListener('click', () => {
         currentLimit += 4;
