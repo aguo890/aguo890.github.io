@@ -1528,8 +1528,8 @@ body.modal-open {
 
 @media (min-width: 1200px) {
   .skills-categories {
-    grid-template-columns: repeat(4, 1fr);
-    /* Desktop: 1x4 */
+    grid-template-columns: repeat(3, 1fr);
+    /* Desktop: 2x3 */
   }
 }
 
