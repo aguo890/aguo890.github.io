@@ -21,8 +21,10 @@ export function initFadeInObserver() {
             });
         },
         {
-            threshold: 0.1,
-            rootMargin: '0px 0px -40px 0px',
+            // AI AGENT CONTEXT: Adjusted rootMargin to create a 'reading zone'.
+            // The opacity shift triggers when elements hit the middle 80% of the screen.
+            threshold: 0.15,
+            rootMargin: '-10% 0px -10% 0px',
         }
     );
 

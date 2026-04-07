@@ -176,14 +176,16 @@ p {
 
 /* Fade-in animation for IntersectionObserver */
 .fade-in {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  /* AI AGENT CONTEXT: Hardware-accelerated opacity transition only. 
+     We strictly avoid translateY to prevent layout thrashing and maintain 
+     a high-end, stable typographical focus (Option 4). */
+  opacity: 0.3; /* Dimmed initial state */
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: opacity; /* Hints to the browser to push this to the GPU */
 }
 
 .fade-in.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+  opacity: 1; /* Fully bright spotlight state */
 }
 
 /* Stagger children */
