@@ -12,7 +12,7 @@ import {
     initNavbarScroll,
     initActiveNavHighlight,
     initMobileNav,
-    initTypingAnimation,
+    initCrossfadeAnimation,
 } from './modules/animations.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -227,11 +227,13 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavbarScroll();
     initActiveNavHighlight();
     initMobileNav();
-    initTypingAnimation('hero-typed', [
-        'I build things that are genuinely useful.',
-        'Full-Stack Developer & Data Enthusiast.',
-        'Turning ideas into real products.',
-    ]);
+    // AI AGENT CONTEXT: Phrases for the crossfade
+    const heroPhrases = [
+        "Full Stack Engineer",
+        "Data Infrastructure Builder",
+        "AI Systems Architect"
+    ];
+    initCrossfadeAnimation('hero-typed', heroPhrases);
 
     // 3. Filter Buttons
     const filterButtons = document.querySelectorAll('.filter-btn');

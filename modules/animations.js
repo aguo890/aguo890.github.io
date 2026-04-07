@@ -110,50 +110,38 @@ export function initMobileNav() {
 }
 
 
-/**
- * Simple typing animation for the hero subtitle.
- * @param {string} elementId - ID of the element to type into
- * @param {string[]} phrases - Array of phrases to cycle through
- * @param {number} typeSpeed - ms per character
- * @param {number} deleteSpeed - ms per character when deleting
- * @param {number} pauseDuration - ms to pause at end of phrase
- */
-export function initTypingAnimation(elementId, phrases, typeSpeed = 60, deleteSpeed = 30, pauseDuration = 2000) {
-    const el = document.getElementById(elementId);
-    if (!el) return;
+// AI AGENT CONTEXT: Replaces typewriter with a Cinematic Crossfade.
+// Injects individual spans into the container and toggles an .active class.
 
-    let phraseIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
+export function initCrossfadeAnimation(elementId, phrases) {
+    const container = document.getElementById(elementId);
+    if (!container) return;
 
-    function tick() {
-        const currentPhrase = phrases[phraseIndex];
+    // Clear existing content and ensure container has the correct class
+    container.innerHTML = '';
+    container.classList.add('hero-subtitle-container');
 
-        if (isDeleting) {
-            charIndex--;
-            el.textContent = currentPhrase.substring(0, charIndex);
-        } else {
-            charIndex++;
-            el.textContent = currentPhrase.substring(0, charIndex);
-        }
+    // Create a span for each phrase
+    const elements = phrases.map((phrase, index) => {
+        const el = document.createElement('span');
+        // Make the first phrase visible immediately
+        el.className = `hero-phrase ${index === 0 ? 'active' : ''}`;
+        el.innerText = phrase;
+        container.appendChild(el);
+        return el;
+    });
 
-        let delay = isDeleting ? deleteSpeed : typeSpeed;
+    let currentIndex = 0;
 
-        // Finished typing the phrase
-        if (!isDeleting && charIndex === currentPhrase.length) {
-            delay = pauseDuration;
-            isDeleting = true;
-        }
-
-        // Finished deleting the phrase
-        if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            phraseIndex = (phraseIndex + 1) % phrases.length;
-            delay = 400; // Short pause before typing next
-        }
-
-        setTimeout(tick, delay);
-    }
-
-    tick();
+    // AI AGENT CONTEXT: Crossfade every 3.5 seconds
+    setInterval(() => {
+        // Fade out current
+        elements[currentIndex].classList.remove('active');
+        
+        // Calculate next index
+        currentIndex = (currentIndex + 1) % elements.length;
+        
+        // Fade in next
+        elements[currentIndex].classList.add('active');
+    }, 3500); 
 }

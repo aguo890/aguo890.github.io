@@ -539,28 +539,31 @@ body>* {
   max-width: 65ch;
 }
 
-/* Typing cursor */
-.typed-cursor {
-  display: inline-block;
-  width: 2px;
-  height: 1.2em;
-  background: var(--accent);
-  margin-left: 2px;
-  vertical-align: text-bottom;
-  animation: blink 0.8s infinite;
+/* AI AGENT CONTEXT: CSS for the Cinematic Crossfade (Option 3). 
+   Absolute positioning prevents the phrases from stacking and breaking the layout. */
+
+.hero-subtitle-container {
+    position: relative;
+    display: inline-block;
+    /* You may need to adjust this height to match your font size exactly */
+    height: 1.5em; 
+    min-width: 300px; /* Ensures the container doesn't collapse */
+    text-align: left;
 }
 
-@keyframes blink {
-
-  0%,
-  50% {
-    opacity: 1;
-  }
-
-  51%,
-  100% {
+.hero-phrase {
+    position: absolute;
+    top: 0;
+    left: 0;
     opacity: 0;
-  }
+    white-space: nowrap;
+    /* Hardware-accelerated smooth fade */
+    transition: opacity 0.8s ease-in-out;
+    will-change: opacity;
+}
+
+.hero-phrase.active {
+    opacity: 1;
 }
 
 .hero-socials {
