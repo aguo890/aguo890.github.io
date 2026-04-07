@@ -628,6 +628,17 @@ body>* {
   gap: var(--space-md);
 }
 
+.load-more-container {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+.hidden {
+  display: none !important;
+}
+
 /* ---- FLAGSHIP (FEATURED) PROJECT CARD ---- */
 /* ---- PROJECT MODAL ---- */
 .modal {

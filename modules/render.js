@@ -119,6 +119,7 @@ function createCard(project) {
   card.className = 'project-card fade-in';
   card.dataset.category = project.category;
   card.dataset.projectId = project.id; // Critical for modal lookup
+  card.setAttribute('tabindex', '-1'); // For screen reader focus management
 
   const linksHTML = buildLinksHTML(project.links);
   const noteHTML = project.note ? `<span class="project-note">${project.note}</span>` : '';
@@ -155,41 +156,51 @@ function createCard(project) {
  * Renders the project grid with cinematic "Exit -> Swap -> Enter" transitions.
  * Returns a Promise that resolves when the grid has been repopulated (before entrance animation starts).
  */
-export async function renderGrid(filterCategory = 'all') {
+export async function renderGrid(filterCategory = 'all', limit = 4, isAppend = false) {
   const grid = document.getElementById('projects-grid');
-  if (!grid) return;
-
-  // 1. Maintain container height to prevent layout shift during swap
-  const currentHeight = grid.offsetHeight;
-  if (currentHeight > 0) {
-    grid.style.minHeight = `${currentHeight}px`;
-  }
-
-  // 2. Exit Animation (if grid has items)
-  const currentCards = grid.querySelectorAll('.project-card');
-  if (currentCards.length > 0) {
-    // Notify accessibility that content is busy
-    grid.setAttribute('aria-busy', 'true');
-
-    currentCards.forEach(card => card.classList.add('exiting'));
-
-    // Wait for CSS transition (300ms)
-    await new Promise(r => setTimeout(r, 300));
-  }
-
-  // 3. Clear & Rebuild
-  grid.innerHTML = '';
+  if (!grid) return 0;
 
   const filtered = filterCategory === 'all'
     ? PROJECTS
     : PROJECTS.filter(p => p.category === filterCategory);
+  
+  const totalAvailable = filtered.length;
+  
+  // Determine slice based on append context
+  const sliceStart = isAppend ? limit - 4 : 0;
+  const currentBatch = filtered.slice(sliceStart, limit);
 
-  filtered.forEach((project, index) => {
+  if (!isAppend) {
+    // 1. Maintain container height to prevent layout shift during swap
+    const currentHeight = grid.offsetHeight;
+    if (currentHeight > 0) {
+      grid.style.minHeight = `${currentHeight}px`;
+    }
+
+    // 2. Exit Animation
+    const currentCards = grid.querySelectorAll('.project-card');
+    if (currentCards.length > 0) {
+      grid.setAttribute('aria-busy', 'true');
+      currentCards.forEach(card => card.classList.add('exiting'));
+      await new Promise(r => setTimeout(r, 300));
+    }
+
+    // 3. Clear container
+    grid.innerHTML = '';
+  }
+
+  // Set aria-busy for accessibility during append/render
+  grid.setAttribute('aria-busy', 'true');
+
+  let firstNewCard = null;
+
+  currentBatch.forEach((project, index) => {
     const card = createCard(project);
+    if (!firstNewCard) firstNewCard = card;
 
     // Set initial state for entrance
     card.classList.add('project-card-enter');
-    // Stagger logic: 50ms per card, capped at 1s max
+    // Stagger logic: calculate delay for new elements only
     card.style.transitionDelay = `${Math.min(index * 50, 1000)}ms`;
 
     grid.appendChild(card);
@@ -200,15 +211,22 @@ export async function renderGrid(filterCategory = 'all') {
   grid.offsetHeight;
 
   requestAnimationFrame(() => {
-    grid.querySelectorAll('.project-card-enter').forEach(card => {
+    // Animate only the newly added items
+    grid.querySelectorAll('.project-card-enter:not(.is-visible)').forEach(card => {
       card.classList.add('is-visible');
     });
 
-    // Reset min-height/aria-busy after animation starts
-    grid.style.minHeight = '';
+    // Reset styles
+    if (!isAppend) {
+      grid.style.minHeight = '';
+    }
     grid.setAttribute('aria-busy', 'false');
+
+    // Focus management for screen readers (only on append)
+    if (isAppend && firstNewCard) {
+       firstNewCard.focus({ preventScroll: true });
+    }
   });
 
-  // Note: We don't strictly need to re-observe .fade-in because we handle visibility manually here.
-  // But if there are other lazy-load images, the global observer handles them if they have .fade-in.
+  return totalAvailable;
 }

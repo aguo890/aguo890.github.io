@@ -171,9 +171,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ── INITIALIZATION ──────────────────────────────────────
 
+    let currentLimit = 4;
+    let currentCategory = 'all';
+
+    async function updateGrid(category, isAppend = false) {
+        const totalAvailable = await renderGrid(category, currentLimit, isAppend);
+        const loadMoreBtnContainer = document.querySelector('.load-more-container');
+        const loadMoreBtn = document.getElementById('load-more-btn');
+        const showLessBtn = document.getElementById('show-less-btn');
+        
+        // Toggle the entire container
+        if (totalAvailable > 4 || currentLimit > 4) {
+            loadMoreBtnContainer.classList.remove('hidden');
+        } else {
+            loadMoreBtnContainer.classList.add('hidden');
+        }
+
+        // Toggle specific buttons
+        if (totalAvailable > currentLimit) {
+            loadMoreBtn.classList.remove('hidden');
+        } else {
+            loadMoreBtn.classList.add('hidden');
+        }
+
+        if (currentLimit > 4) {
+            showLessBtn.classList.remove('hidden');
+        } else {
+            showLessBtn.classList.add('hidden');
+        }
+        
+        attachCardInteractions();
+    }
+
     // 1. Render Grid
-    renderGrid('all');
-    attachCardInteractions();
+    updateGrid('all');
+
+    document.getElementById('load-more-btn').addEventListener('click', () => {
+        currentLimit += 4;
+        updateGrid(currentCategory, true);
+    });
+
+    document.getElementById('show-less-btn').addEventListener('click', () => {
+        const projectsSection = document.getElementById('projects');
+        projectsSection.scrollIntoView({ behavior: 'smooth' });
+
+        currentLimit = 4;
+        
+        setTimeout(() => {
+            updateGrid(currentCategory, false); 
+        }, 300); 
+    });
 
     // 2. Animations
     initFadeInObserver();
@@ -205,10 +252,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const category = btn.dataset.category;
 
             // Wait for Cinematic Render
-            await renderGrid(category);
-
-            // Re-attach listeners to new cards
-            attachCardInteractions();
+            currentLimit = 4;
+            currentCategory = category;
+            await updateGrid(category, false);
 
             // Unlock buttons
             filterButtons.forEach(b => {
