@@ -179,13 +179,16 @@ p {
   /* AI AGENT CONTEXT: Hardware-accelerated opacity transition only. 
      We strictly avoid translateY to prevent layout thrashing and maintain 
      a high-end, stable typographical focus (Option 4). */
-  opacity: 0.3; /* Dimmed initial state */
+  opacity: 0.3;
+  /* Dimmed initial state */
   transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-  will-change: opacity; /* Hints to the browser to push this to the GPU */
+  will-change: opacity;
+  /* Hints to the browser to push this to the GPU */
 }
 
 .fade-in.is-visible {
-  opacity: 1; /* Fully bright spotlight state */
+  opacity: 1;
+  /* Fully bright spotlight state */
 }
 
 /* Stagger children */
@@ -543,27 +546,28 @@ body>* {
    Absolute positioning prevents the phrases from stacking and breaking the layout. */
 
 .hero-subtitle-container {
-    position: relative;
-    display: inline-block;
-    /* You may need to adjust this height to match your font size exactly */
-    height: 1.5em; 
-    min-width: 300px; /* Ensures the container doesn't collapse */
-    text-align: left;
+  position: relative;
+  display: inline-block;
+  /* You may need to adjust this height to match your font size exactly */
+  height: 1.5em;
+  min-width: 300px;
+  /* Ensures the container doesn't collapse */
+  text-align: left;
 }
 
 .hero-phrase {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    white-space: nowrap;
-    /* Hardware-accelerated smooth fade */
-    transition: opacity 0.8s ease-in-out;
-    will-change: opacity;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  white-space: nowrap;
+  /* Hardware-accelerated smooth fade */
+  transition: opacity 0.8s ease-in-out;
+  will-change: opacity;
 }
 
 .hero-phrase.active {
-    opacity: 1;
+  opacity: 1;
 }
 
 .hero-socials {
@@ -1576,7 +1580,7 @@ body.modal-open {
   padding: 6px 14px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border);
-  border-radius: var(--radius-full);
+  /* border-radius: var(--radius-full) */
   color: var(--text-primary);
   transition: all var(--transition-fast);
 }
