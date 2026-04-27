@@ -122,30 +122,66 @@ document.addEventListener('DOMContentLoaded', () => {
             const video = card.querySelector('video');
             const projectId = card.dataset.projectId;
 
-            // 1. Hover Video Preview (Card)
+            // 1. Hover Video Preview (Card) — Lazy Load + Poster Crossfade
             if (video) {
                 video.muted = true; // Required for autoplay
                 video.playbackRate = 1.0; // Normal Speed
 
+                const poster = card.querySelector('.project-card-poster');
+                let videoInitialized = false;
                 let playPromise;
+                let hovering = false;
 
                 card.addEventListener('mouseenter', () => {
-                    playPromise = video.play();
+                    hovering = true;
 
+                    // Lazy-load: upgrade preload on first hover
+                    if (!videoInitialized) {
+                        video.preload = 'auto';
+                        videoInitialized = true;
+
+                        // Wait for video to be ready before playing
+                        video.addEventListener('canplaythrough', () => {
+                            // Guard: user may have already left the card
+                            if (!hovering) return;
+
+                            // Fade poster out, reveal video
+                            if (poster) poster.classList.add('fade-out');
+                            playPromise = video.play();
+                            if (playPromise !== undefined) {
+                                playPromise.catch(() => {
+                                    // Autoplay blocked — keep poster
+                                    if (poster) poster.classList.remove('fade-out');
+                                });
+                            }
+                        }, { once: true });
+
+                        // Force the browser to start loading
+                        video.load();
+                        return;
+                    }
+
+                    // Subsequent hovers — video already loaded
+                    if (poster) poster.classList.add('fade-out');
+                    playPromise = video.play();
                     if (playPromise !== undefined) {
-                        playPromise.catch(error => {
-                            console.log('Autoplay prevented:', error);
+                        playPromise.catch(() => {
+                            // Interrupted by rapid mouseleave — safe to ignore
                         });
                     }
                 });
 
                 card.addEventListener('mouseleave', () => {
+                    hovering = false;
+
+                    // Show poster again on leave
+                    if (poster) poster.classList.remove('fade-out');
+
                     if (playPromise !== undefined) {
                         playPromise.then(() => {
                             video.pause();
                             video.currentTime = 0;
                         }).catch(() => {
-                            // Video might not have started yet, ensuring pause
                             video.pause();
                             video.currentTime = 0;
                         });
@@ -266,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 4. Hero Carousel
+    // 4. Hero Carousel — Poster-First Progressive Loading
     const initHeroCarousel = () => {
         const carousel = document.getElementById('hero-carousel');
         const visual = document.querySelector('.hero-visual');
@@ -296,15 +332,42 @@ document.addEventListener('DOMContentLoaded', () => {
             // Interaction: Click to open modal
             card.addEventListener('click', () => openModal(project.id));
 
-            // Populate Content
+            // Populate Content — Poster-First Strategy
             if (project.video) {
+                // Layer 1: Poster image (renders immediately, ~50ms)
+                const posterSrc = project.poster || project.image;
+                if (posterSrc) {
+                    const poster = document.createElement('img');
+                    poster.src = posterSrc;
+                    poster.className = 'carousel-card-poster';
+                    poster.alt = `${project.title} preview`;
+                    card.appendChild(poster);
+                }
+
+                // Layer 2: Video (loads in background, hidden until ready)
                 const vid = document.createElement('video');
                 vid.src = project.video;
                 vid.muted = true;
                 vid.loop = true;
-                vid.autoplay = true;
                 vid.playsInline = true;
+                vid.preload = 'auto';
+                // Do NOT set autoplay — we control playback via canplaythrough
                 card.appendChild(vid);
+
+                // Crossfade: when video is fully buffered, fade poster out and play
+                vid.addEventListener('canplaythrough', () => {
+                    card.classList.add('video-ready');
+                    vid.play().catch(() => {
+                        // Autoplay blocked — keep poster visible
+                        card.classList.remove('video-ready');
+                    });
+                }, { once: true });
+
+                // Fallback: if video fails, keep poster visible permanently
+                vid.addEventListener('error', () => {
+                    card.classList.remove('video-ready');
+                }, { once: true });
+
             } else if (project.image) {
                 const img = document.createElement('img');
                 img.src = project.image;

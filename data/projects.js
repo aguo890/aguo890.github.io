@@ -33,6 +33,7 @@ export const PROJECTS = [
     category: "full-stack",
     image: null,
     video: "images/projects/capstone.mp4",
+    poster: "images/projects/capstone-poster.jpg",
     gallery: [
       "images/projects/jega-dashboard.png",
       "images/projects/jega-activity.png",
@@ -72,6 +73,7 @@ export const PROJECTS = [
     category: "full-stack",
     image: null,
     video: "images/projects/Linesight.mp4",
+    poster: "images/projects/Linesight-poster.jpg",
     gallery: [],
     links: {
       github: "https://github.com/aguo890/linesight",
@@ -106,6 +108,7 @@ export const PROJECTS = [
     category: "full-stack",
     image: null,
     video: "images/projects/LokumAI.mp4",
+    poster: "images/projects/LokumAI-poster.jpg",
     gallery: [],
     links: {
       github: "https://github.com/aguo890/tax-os",
@@ -138,7 +141,8 @@ export const PROJECTS = [
     category: "open-source", 
     image: null,
     // TODO: Replace with a new video showing the Streamlit dashboard AND the CV generation
-    video: "images/projects/job-scraping-app.mp4", 
+    video: "images/projects/job-scraping-app.mp4",
+    poster: "images/projects/job-scraping-app-poster.jpg",
     gallery: [],
     links: {
       github: "https://github.com/aguo890/Job-Automation-Suite",
@@ -162,6 +166,7 @@ export const PROJECTS = [
     category: "open-source",
     image: null,
     video: "images/projects/job-scraping-app.mp4",
+    poster: "images/projects/job-scraping-app-poster.jpg",
     gallery: [],
     links: {
       github: "https://github.com/aguo890/job-scraping-app",
@@ -182,6 +187,7 @@ export const PROJECTS = [
     category: "open-source",
     image: null,
     video: "images/projects/rendercv.mp4",
+    poster: "images/projects/rendercv-poster.jpg",
     gallery: [],
     links: {
       github: "https://github.com/aguo890/rendercv",

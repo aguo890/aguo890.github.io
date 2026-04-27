@@ -53,9 +53,11 @@ function hashCode(str) {
  */
 function buildImageHTML(project, badgeHTML = '') {
   if (project.video) {
+    const posterSrc = project.poster || project.image || '';
     return `
       <div class="project-card-image">
-        <video src="${project.video}" poster="${project.image || ''}" loop muted playsinline></video>
+        ${posterSrc ? `<img src="${posterSrc}" alt="${project.title} preview" class="project-card-poster" loading="lazy" />` : ''}
+        <video src="${project.video}" poster="${posterSrc}" loop muted playsinline preload="none"></video>
         ${badgeHTML}
         <div class="project-card-overlay" aria-hidden="true">
           <span class="project-card-overlay-text">View Details</span>
