@@ -85,34 +85,33 @@ export const PROJECTS = [
   },
 
   // ═══════════════════════════════════════════════════════════
-  // FLAGSHIP 2: LokumAI
+  // FLAGSHIP 2: NeuroPilot
   // ═══════════════════════════════════════════════════════════
   {
-    id: "lokumai",
-    title: "LokumAI",
-    subtitle: "Smart Tax Optimization for Traveling Physicians",
+    id: "neuropilot",
+    title: "NeuroPilot",
+    subtitle: "High-Performance Brain-Computer Interface Framework",
     description:
-      "A specialized fintech platform for locum tenens physicians operating S-Corps across multiple states. LokumAI automates multi-state payroll apportionment, enforces Accountable Plan compliance, and features an agentic AI assistant (\"Lucas\") that performs multi-step tax reasoning with RAG-powered citations. Built to protect physicians from audit risk — not just track expenses.",
+      "An open-source framework for building bi-directional brain-computer interface (BCI) applications. NeuroPilot features a foundational architecture capable of ingesting high-throughput raw electrical neural signals and performing real-time low-latency decoding for seamless cursor control and UI navigation.",
     highlights: [
-      "Multi-state tax nexus calculator with physical presence day tracking",
-      "Payroll apportionment engine with state reciprocity logic (e.g., MD→PA)",
-      "Agentic AI CPA \"Lucas\" with router, RAG context, and HITL write actions",
-      "Accountable Plan validation engine for IRS compliance",
-      "Audit log with event sourcing — every financial mutation is traceable",
-      "Gusto payroll integration (mock + production modes)",
+      "N1Fusion Link: Simulated hardware bridge generating 100Hz synthetic telemetry streams over TCP",
+      "NeuroPilot Desktop: Low-latency Mac/iOS Swift application with Apple Metal rendering pipeline",
+      "NeuroPilot Core: Performant C++ engine running Kalman filters for real-time neural decoding",
+      "Clinical Dashboard: React + FastAPI dashboard with TimescaleDB for remote session logging",
+      "Designed for clinical iteration and to run modular, multi-language processing pipelines",
     ],
     techStack: [
-      "React", "TypeScript", "FastAPI", "MySQL",
-      "OpenAI GPT-4o", "Veryfi OCR", "Docker", "Tailwind CSS",
+      "Rust", "C++", "Swift", "React", "TypeScript",
+      "Python", "FastAPI", "PostgreSQL", "TimescaleDB",
     ],
     category: "full-stack",
     image: null,
-    video: "images/projects/LokumAI.mp4",
-    poster: "images/projects/LokumAI-poster.jpg",
+    video: "images/projects/NeuroPilot.mov",
+    poster: "images/projects/neuropilot-poster.jpg",
     gallery: [],
     links: {
-      github: "https://github.com/aguo890/tax-os",
-      demo: "https://drive.google.com/file/d/1-6cWK3L9uAJTZqGEh0gtmbpxBO6OLAv_/view?usp=drive_link",
+      github: "https://github.com/aguo890/neuropilot",
+      demo: null,
       live: null,
     },
     note: "",
@@ -138,7 +137,7 @@ export const PROJECTS = [
       "Python 3.12", "Streamlit", "LaTeX", "Docker", "GitHub Actions", "OpenAI API",
     ],
     // AI AGENT CONTEXT: Reverting category to open-source as requested to populate the Open Source tab alongside its individual sub-projects.
-    category: "open-source", 
+    category: "open-source",
     image: null,
     // TODO: Replace with a new video showing the Streamlit dashboard AND the CV generation
     video: "images/projects/job-scraping-app.mp4",
